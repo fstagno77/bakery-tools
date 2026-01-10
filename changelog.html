@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Changelog - Bakery Tools</title>
+    <link rel="icon" type="image/png" href="images/logo_favicon.png">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,14 +14,28 @@
     <div class="app">
         <header class="header">
             <div class="container header-content">
+                <button id="menu-toggle" class="menu-toggle" aria-label="Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <span class="menu-label">Menu</span>
+                </button>
                 <div class="header-main">
                     <a href="index.html" class="logo-link">
                         <img src="images/logo_header.png" alt="Bakery Tools" class="logo-img">
                     </a>
                 </div>
-                <div class="header-controls">
+                <div class="header-controls" id="header-controls">
                     <button id="lang-toggle" class="control-btn" title="Change language">
                         <span class="control-label">IT</span>
+                    </button>
+                    <button id="temp-toggle" class="control-btn" title="Change temperature unit">
+                        <span class="control-label">°C</span>
+                    </button>
+                    <button id="weight-toggle" class="control-btn" title="Change weight unit">
+                        <span class="control-label">g</span>
                     </button>
                 </div>
             </div>
@@ -55,22 +70,39 @@
         <footer class="footer">
             <div class="container footer-content">
                 <p>&copy; Proof - a baking helper by Francesco Stagno d'Alcontres</p>
-                <span class="version-current" id="version-current">v0.1</span>
+                <a href="changelog.html" class="version-link" id="version-link">Versione 0.3</a>
             </div>
         </footer>
     </div>
 
     <script type="module">
-        import { loadSavedLang, getCurrentLang, toggleLang, t } from './js/i18n.js';
+        import { loadSavedLang, getCurrentLang, toggleLang } from './js/i18n.js';
+        import { loadSavedUnit, toggleUnit, getUnitLabel } from './js/temperature.js';
+        import { loadSavedWeightUnit, toggleWeightUnit, getWeightUnitLabel } from './js/units.js';
 
-        // Carica lingua salvata
+        // Carica preferenze salvate
         loadSavedLang();
-        const lang = getCurrentLang();
+        loadSavedUnit();
+        loadSavedWeightUnit();
+
+        // Menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const headerControls = document.getElementById('header-controls');
+        if (menuToggle && headerControls) {
+            menuToggle.addEventListener('click', () => {
+                headerControls.classList.toggle('open');
+            });
+            document.addEventListener('click', (e) => {
+                if (!menuToggle.contains(e.target) && !headerControls.contains(e.target)) {
+                    headerControls.classList.remove('open');
+                }
+            });
+        }
 
         // Toggle lingua
         const langToggle = document.getElementById('lang-toggle');
         const langLabel = langToggle.querySelector('.control-label');
-        langLabel.textContent = lang.toUpperCase();
+        langLabel.textContent = getCurrentLang().toUpperCase();
 
         langToggle.addEventListener('click', () => {
             const newLang = toggleLang();
@@ -79,17 +111,40 @@
             updateStaticText();
         });
 
+        // Toggle temperatura
+        const tempToggle = document.getElementById('temp-toggle');
+        const tempLabel = tempToggle.querySelector('.control-label');
+        tempLabel.textContent = getUnitLabel();
+
+        tempToggle.addEventListener('click', () => {
+            toggleUnit();
+            tempLabel.textContent = getUnitLabel();
+        });
+
+        // Toggle peso
+        const weightToggle = document.getElementById('weight-toggle');
+        const weightLabel = weightToggle.querySelector('.control-label');
+        weightLabel.textContent = getWeightUnitLabel();
+
+        weightToggle.addEventListener('click', () => {
+            toggleWeightUnit();
+            weightLabel.textContent = getWeightUnitLabel();
+        });
+
         // Aggiorna testi statici
         function updateStaticText() {
             const lang = getCurrentLang();
-            document.getElementById('changelog-title').textContent = lang === 'it' ? 'Changelog' : 'Changelog';
+            document.getElementById('changelog-title').textContent = 'Changelog';
             document.getElementById('changelog-description').textContent = lang === 'it'
                 ? 'Storico delle modifiche e aggiornamenti.'
                 : 'History of changes and updates.';
             document.getElementById('back-link').textContent = lang === 'it'
                 ? '← Torna al calcolatore'
                 : '← Back to calculator';
-            document.querySelector('[data-i18n="tagline"]').textContent = t('tagline');
+
+            // Aggiorna versione nel footer
+            const versionLabel = lang === 'it' ? 'Versione' : 'Version';
+            document.getElementById('version-link').textContent = `${versionLabel} 0.3`;
         }
 
         // Carica e renderizza il changelog
@@ -102,9 +157,7 @@
                 const container = document.getElementById('changelog-content');
                 container.innerHTML = '';
 
-                // Aggiorna versione nel footer
                 const versionLabel = lang === 'it' ? 'Versione' : 'Version';
-                document.getElementById('version-current').textContent = `${versionLabel} ${data.currentVersion}`;
 
                 // Renderizza ogni versione
                 for (const version of data.versions) {
@@ -127,6 +180,7 @@
                 }
             } catch (error) {
                 console.error('Error loading changelog:', error);
+                document.getElementById('changelog-content').innerHTML = '<p>Errore nel caricamento del changelog.</p>';
             }
         }
 

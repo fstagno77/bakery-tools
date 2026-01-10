@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bakery Tools - Strumenti per la Panificazione</title>
+    <link rel="icon" type="image/png" href="images/logo_favicon.png">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,12 +14,20 @@
     <div class="app">
         <header class="header">
             <div class="container header-content">
+                <button id="menu-toggle" class="menu-toggle" aria-label="Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <span class="menu-label">Menu</span>
+                </button>
                 <div class="header-main">
                     <a href="index.html" class="logo-link">
                         <img src="images/logo_header.png" alt="Bakery Tools" class="logo-img">
                     </a>
                 </div>
-                <div class="header-controls">
+                <div class="header-controls" id="header-controls">
                     <button id="lang-toggle" class="control-btn" title="Change language">
                         <span class="control-label">IT</span>
                     </button>
@@ -41,7 +50,7 @@
                     <div class="tab-nav">
                         <button class="tab-btn active" data-tab="levain"><span class="tab-icon">🍞</span> <span data-i18n="tabs.levain">Prepara Levain</span></button>
                         <button class="tab-btn" data-tab="maintenance"><span class="tab-icon">📅</span> <span data-i18n="tabs.maintenance">Rinfresco Giornaliero</span></button>
-                        <button class="tab-btn" data-tab="storage"><span class="tab-icon">❄️</span> <span data-i18n="tabs.storage">Conservazione</span></button>
+                        <button class="tab-btn" data-tab="storage"><span class="tab-icon">❄️</span> <span data-i18n="tabs.storage">Pausa</span></button>
                     </div>
 
                     <!-- Tab: Prepara Levain -->
@@ -234,7 +243,7 @@
         <footer class="footer">
             <div class="container footer-content">
                 <p>&copy; Proof - a baking helper by Francesco Stagno d'Alcontres</p>
-                <a href="changelog.html" class="version-link" id="version-link">Versione 0.2</a>
+                <a href="changelog.html" class="version-link" id="version-link">Versione 0.3</a>
             </div>
         </footer>
     </div>

@@ -19,7 +19,7 @@ export const translations = {
         // Tabs
         "tabs.levain": "Prepara Levain",
         "tabs.maintenance": "Rinfresco Giornaliero",
-        "tabs.storage": "Conservazione",
+        "tabs.storage": "Pausa",
 
         // Levain tab
         "levain.description": "Calcola le quantità per ottenere lo starter desiderato per la panificazione.",
@@ -225,12 +225,24 @@ export function setLang(lang) {
 }
 
 /**
- * Carica la lingua salvata
+ * Rileva la lingua del browser
+ */
+function detectBrowserLang() {
+    const browserLang = navigator.language || navigator.userLanguage || '';
+    // Se la lingua del browser inizia con 'it', usa italiano
+    return browserLang.toLowerCase().startsWith('it') ? 'it' : 'en';
+}
+
+/**
+ * Carica la lingua salvata o rileva automaticamente
  */
 export function loadSavedLang() {
     const saved = localStorage.getItem('bakery-tools-lang');
     if (saved && translations[saved]) {
         currentLang = saved;
+    } else {
+        // Nessuna preferenza salvata: rileva dalla lingua del browser
+        currentLang = detectBrowserLang();
     }
     return currentLang;
 }

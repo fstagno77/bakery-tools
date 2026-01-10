@@ -58,6 +58,7 @@ function init() {
     injectErrorStyles();
 
     // Inizializza controlli header
+    initMenuToggle();
     initLanguageToggle();
     initTemperatureToggle();
     initWeightToggle();
@@ -78,6 +79,27 @@ function init() {
 
     // Inizializza scroll to top button
     initScrollToTop();
+}
+
+/**
+ * Inizializza il menu hamburger per mobile
+ */
+function initMenuToggle() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const headerControls = document.getElementById('header-controls');
+
+    if (!menuToggle || !headerControls) return;
+
+    menuToggle.addEventListener('click', () => {
+        headerControls.classList.toggle('open');
+    });
+
+    // Chiudi il menu quando si clicca fuori
+    document.addEventListener('click', (e) => {
+        if (!menuToggle.contains(e.target) && !headerControls.contains(e.target)) {
+            headerControls.classList.remove('open');
+        }
+    });
 }
 
 /**
@@ -356,17 +378,10 @@ function initScrollToTop() {
 
 /**
  * Scrolla ai risultati su dispositivi mobile dopo il calcolo
+ * NOTA: Funzione disabilitata - lo scroll automatico era fastidioso su mobile
  */
-function scrollToResultsOnMobile(container) {
-    // Solo su mobile (larghezza < 768px)
-    if (window.innerWidth < 768) {
-        setTimeout(() => {
-            container.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }, 100);
-    }
+function scrollToResultsOnMobile() {
+    // Scroll automatico disabilitato
 }
 
 // Avvia l'app quando il DOM è pronto

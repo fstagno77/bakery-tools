@@ -1,6 +1,36 @@
 {
-    "currentVersion": "0.2",
+    "currentVersion": "0.3",
     "versions": [
+        {
+            "version": "0.3",
+            "date": "2026-01-10",
+            "changes": {
+                "it": [
+                    "Rilevamento automatico lingua: italiano per browser italiani, inglese per tutti gli altri",
+                    "Rimosso auto-scroll ai risultati su mobile",
+                    "Header mobile: logo centrato con menu hamburger per le impostazioni",
+                    "Tab 'Conservazione' rinominato in 'Pausa' per brevità",
+                    "Emoji nascoste su mobile per un look più pulito",
+                    "Footer mobile: copyright centrato con versione sotto",
+                    "Tab navigation scrollabile orizzontalmente su mobile",
+                    "Badge 'Consigliato' riposizionato: centrato su desktop, sopra la riga su mobile",
+                    "Rimosso bordo colorato laterale sulle card risultati su mobile",
+                    "Header e footer uniformati tra tutte le pagine"
+                ],
+                "en": [
+                    "Automatic language detection: Italian for Italian browsers, English for everyone else",
+                    "Removed auto-scroll to results on mobile",
+                    "Mobile header: centered logo with hamburger menu for settings",
+                    "Tab 'Storage' renamed to 'Pausa' (Italian) for brevity",
+                    "Emojis hidden on mobile for cleaner look",
+                    "Mobile footer: centered copyright with version below",
+                    "Horizontally scrollable tab navigation on mobile",
+                    "Repositioned 'Recommended' badge: centered on desktop, above row on mobile",
+                    "Removed colored left border on result cards on mobile",
+                    "Unified header and footer across all pages"
+                ]
+            }
+        },
         {
             "version": "0.2",
             "date": "2026-01-10",

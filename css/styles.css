@@ -165,14 +165,72 @@ body {
     display: block;
 }
 
+/* --- Menu Toggle (hamburger) --- */
+.menu-toggle {
+    display: none;
+    align-items: center;
+    gap: var(--space-xs);
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: var(--space-sm);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+.menu-label {
+    display: inline;
+}
+
 @media (max-width: 480px) {
     .header-content {
-        flex-direction: column;
-        gap: var(--space-md);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .menu-toggle {
+        display: flex;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     .header-main {
         text-align: center;
+    }
+
+    .header-controls {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: -16px;
+        right: -16px;
+        background-color: var(--color-bg-card);
+        border-top: 1px solid var(--color-border);
+        padding: var(--space-md);
+        flex-direction: column;
+        gap: var(--space-sm);
+        box-shadow: var(--shadow-md);
+        z-index: 100;
+    }
+
+    .header-controls.open {
+        display: flex;
+    }
+
+    .header-controls .control-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Nascondi emoji nelle tab su mobile */
+    .tab-icon {
+        display: none;
     }
 }
 
@@ -261,6 +319,25 @@ body {
     cursor: pointer;
     transition: all var(--transition-fast);
     position: relative;
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .tab-nav {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+
+    .tab-nav::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
+
+    .tab-btn {
+        flex-shrink: 0;
+        padding: var(--space-sm) var(--space-md);
+    }
 }
 
 .tab-btn:hover {
@@ -447,6 +524,13 @@ body {
     margin-bottom: var(--space-md);
 }
 
+@media (max-width: 480px) {
+    .result-card-header {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
 .ratio-badge {
     font-size: var(--font-size-xl);
     font-weight: 700;
@@ -460,6 +544,15 @@ body {
     border-radius: var(--radius-sm);
     font-size: var(--font-size-sm);
     font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .recommended-badge {
+        order: -1;
+        width: 100%;
+        text-align: center;
+        margin-bottom: var(--space-sm);
+    }
 }
 
 .result-amounts {
@@ -757,6 +850,14 @@ body {
     font-weight: 500;
 }
 
+@media (max-width: 480px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-sm);
+    }
+}
+
 /* --- Changelog Page --- */
 .changelog-section {
     max-width: 800px;
@@ -900,5 +1001,14 @@ body {
 
     .tool-section {
         padding: var(--space-md);
+    }
+
+    /* Rimuovi border-left colorato su mobile per layout centrato */
+    .result-card {
+        border-left: none;
+    }
+
+    .result-card.recommended {
+        border-left: none;
     }
 }
