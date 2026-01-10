@@ -1,6 +1,20 @@
 {
-    "currentVersion": "0.3",
+    "currentVersion": "0.4",
     "versions": [
+        {
+            "version": "0.4",
+            "date": "2026-01-10",
+            "changes": {
+                "it": [
+                    "Bloccato trascinamento verticale del tab navigation su mobile (permesso solo scroll orizzontale)",
+                    "Aggiunto supporto icona iOS per aggiunta alla home screen"
+                ],
+                "en": [
+                    "Fixed vertical dragging of tab navigation on mobile (only horizontal scroll allowed)",
+                    "Added iOS icon support for home screen bookmark"
+                ]
+            }
+        },
         {
             "version": "0.3",
             "date": "2026-01-10",

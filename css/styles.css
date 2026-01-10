@@ -328,6 +328,8 @@ body {
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none; /* IE/Edge */
+        touch-action: pan-x; /* Blocca scroll verticale, permette solo orizzontale */
+        overscroll-behavior-x: contain; /* Previene scroll della pagina quando si raggiunge il limite */
     }
 
     .tab-nav::-webkit-scrollbar {
