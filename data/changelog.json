@@ -1,0 +1,53 @@
+{
+    "currentVersion": "0.2",
+    "versions": [
+        {
+            "version": "0.2",
+            "date": "2026-01-10",
+            "changes": {
+                "it": [
+                    "Nuovo tab Conservazione con guida per conservare lo starter in frigo",
+                    "Toggle unità peso grammi/once con conversione automatica",
+                    "Scroll automatico ai risultati su mobile dopo il calcolo",
+                    "Pulsante floating per tornare in cima alla pagina",
+                    "Emoji nelle tab per migliorare la navigazione visiva",
+                    "Messaggi di validazione adattati all'unità di peso selezionata"
+                ],
+                "en": [
+                    "New Storage tab with guide for refrigerator starter storage",
+                    "Weight unit toggle grams/ounces with automatic conversion",
+                    "Auto-scroll to results on mobile after calculation",
+                    "Floating button to scroll back to top",
+                    "Emojis in tabs for improved visual navigation",
+                    "Validation messages adapted to selected weight unit"
+                ]
+            }
+        },
+        {
+            "version": "0.1",
+            "date": "2026-01-10",
+            "changes": {
+                "it": [
+                    "Calcolatore Lievito Madre con due modalità",
+                    "Modalità Prepara Levain: calcola quantità per panificazione",
+                    "Modalità Rinfresco Giornaliero: calcola inoculo da farina disponibile",
+                    "Arrotondamento intelligente farina/acqua a multipli di 5",
+                    "Tabella di riferimento tempi per temperatura",
+                    "Supporto multilingua Italiano/Inglese",
+                    "Toggle unità temperatura Celsius/Fahrenheit",
+                    "Design responsive per mobile e desktop"
+                ],
+                "en": [
+                    "Sourdough Starter Calculator with two modes",
+                    "Build Levain mode: calculate quantities for baking",
+                    "Daily Feeding mode: calculate inoculum from available flour",
+                    "Smart rounding of flour/water to multiples of 5",
+                    "Reference table for times by temperature",
+                    "Multi-language support Italian/English",
+                    "Temperature unit toggle Celsius/Fahrenheit",
+                    "Responsive design for mobile and desktop"
+                ]
+            }
+        }
+    ]
+}

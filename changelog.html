@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog - Bakery Tools</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="container header-content">
+                <div class="header-main">
+                    <a href="index.html" class="logo-link">
+                        <img src="images/logo_header.png" alt="Bakery Tools" class="logo-img">
+                    </a>
+                </div>
+                <div class="header-controls">
+                    <button id="lang-toggle" class="control-btn" title="Change language">
+                        <span class="control-label">IT</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <nav class="nav">
+            <div class="container">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link" id="back-link">← Torna al calcolatore</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main">
+            <div class="container">
+                <section class="tool-section changelog-section">
+                    <div class="tool-header">
+                        <h2 id="changelog-title">Changelog</h2>
+                        <p class="tool-description" id="changelog-description">
+                            Storico delle modifiche e aggiornamenti.
+                        </p>
+                    </div>
+
+                    <div id="changelog-content" class="changelog-content">
+                        <!-- Populated by JavaScript -->
+                    </div>
+
+                </section>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container footer-content">
+                <p>&copy; Proof - a baking helper by Francesco Stagno d'Alcontres</p>
+                <span class="version-current" id="version-current">v0.1</span>
+            </div>
+        </footer>
+    </div>
+
+    <script type="module">
+        import { loadSavedLang, getCurrentLang, toggleLang, t } from './js/i18n.js';
+
+        // Carica lingua salvata
+        loadSavedLang();
+        const lang = getCurrentLang();
+
+        // Toggle lingua
+        const langToggle = document.getElementById('lang-toggle');
+        const langLabel = langToggle.querySelector('.control-label');
+        langLabel.textContent = lang.toUpperCase();
+
+        langToggle.addEventListener('click', () => {
+            const newLang = toggleLang();
+            langLabel.textContent = newLang.toUpperCase();
+            renderChangelog();
+            updateStaticText();
+        });
+
+        // Aggiorna testi statici
+        function updateStaticText() {
+            const lang = getCurrentLang();
+            document.getElementById('changelog-title').textContent = lang === 'it' ? 'Changelog' : 'Changelog';
+            document.getElementById('changelog-description').textContent = lang === 'it'
+                ? 'Storico delle modifiche e aggiornamenti.'
+                : 'History of changes and updates.';
+            document.getElementById('back-link').textContent = lang === 'it'
+                ? '← Torna al calcolatore'
+                : '← Back to calculator';
+            document.querySelector('[data-i18n="tagline"]').textContent = t('tagline');
+        }
+
+        // Carica e renderizza il changelog
+        async function renderChangelog() {
+            try {
+                const response = await fetch('data/changelog.json');
+                const data = await response.json();
+                const lang = getCurrentLang();
+
+                const container = document.getElementById('changelog-content');
+                container.innerHTML = '';
+
+                // Aggiorna versione nel footer
+                const versionLabel = lang === 'it' ? 'Versione' : 'Version';
+                document.getElementById('version-current').textContent = `${versionLabel} ${data.currentVersion}`;
+
+                // Renderizza ogni versione
+                for (const version of data.versions) {
+                    const versionEl = document.createElement('div');
+                    versionEl.className = 'changelog-version';
+
+                    const changes = version.changes[lang] || version.changes['it'];
+
+                    versionEl.innerHTML = `
+                        <div class="version-header">
+                            <h3 class="version-number">${versionLabel} ${version.version}</h3>
+                            <span class="version-date">${formatDateTime(version.date, version.time, lang)}</span>
+                        </div>
+                        <ul class="version-changes">
+                            ${changes.map(change => `<li>${change}</li>`).join('')}
+                        </ul>
+                    `;
+
+                    container.appendChild(versionEl);
+                }
+            } catch (error) {
+                console.error('Error loading changelog:', error);
+            }
+        }
+
+        function formatDateTime(dateStr, timeStr, lang) {
+            const date = new Date(dateStr);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const dateFormatted = date.toLocaleDateString(lang === 'it' ? 'it-IT' : 'en-US', options);
+
+            if (timeStr) {
+                const atLabel = lang === 'it' ? 'alle' : 'at';
+                return `${dateFormatted} ${atLabel} ${timeStr}`;
+            }
+            return dateFormatted;
+        }
+
+        // Inizializza
+        updateStaticText();
+        renderChangelog();
+    </script>
+</body>
+</html>
