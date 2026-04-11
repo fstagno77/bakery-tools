@@ -49,14 +49,62 @@
                 <section id="starter-calculator" class="tool-section">
                     <!-- Tab Navigation -->
                     <div class="tab-nav">
-                        <button class="tab-btn active" data-tab="levain"><span class="tab-icon">🍞</span> <span data-i18n="tabs.levain">Prepara Levain</span></button>
+                        <button class="tab-btn active" data-tab="calcolatore"><span class="tab-icon">⚖️</span> <span>Calcolatore</span></button>
+                        <button class="tab-btn" data-tab="levain"><span class="tab-icon">🍞</span> <span data-i18n="tabs.levain">Prepara Levain</span></button>
                         <button class="tab-btn" data-tab="maintenance"><span class="tab-icon">📅</span> <span data-i18n="tabs.maintenance">Rinfresco Giornaliero</span></button>
                         <button class="tab-btn" data-tab="storage"><span class="tab-icon">❄️</span> <span data-i18n="tabs.storage">Pausa</span></button>
-                        <button class="tab-btn" data-tab="calcolatore"><span class="tab-icon">⚖️</span> <span>Calcolatore</span></button>
+                    </div>
+
+                    <!-- Tab: Calcolatore -->
+                    <div id="tab-calcolatore" class="tab-content active">
+                        <p class="tab-description">
+                            Inserisci il ratio e i grammi di uno degli ingredienti — gli altri si calcolano in automatico.
+                        </p>
+
+                        <div class="ratio-calc-card">
+                            <div class="ratio-row-label">Ratio starter : farina : acqua</div>
+                            <div class="ratio-row">
+                                <input type="number" id="ratio-s" class="ratio-part-input" value="1" min="0.5" max="20" step="0.5">
+                                <span class="ratio-sep">:</span>
+                                <input type="number" id="ratio-f" class="ratio-part-input" value="2" min="0.5" max="20" step="0.5">
+                                <span class="ratio-sep">:</span>
+                                <input type="number" id="ratio-a" class="ratio-part-input" value="2" min="0.5" max="20" step="0.5">
+                            </div>
+                            <div class="ratio-legend-row">
+                                <span>starter</span>
+                                <span>farina</span>
+                                <span>acqua</span>
+                            </div>
+                        </div>
+
+                        <div class="ratio-grams-label">Inserisci i grammi di uno degli ingredienti</div>
+
+                        <div class="ratio-grams-grid">
+                            <div class="ratio-gram-card">
+                                <label class="ratio-gram-label">Starter</label>
+                                <input type="number" id="ratio-starter-g" class="ratio-gram-input ratio-source" value="50" min="0" step="1">
+                                <span class="ratio-gram-unit">grammi</span>
+                            </div>
+                            <div class="ratio-gram-card">
+                                <label class="ratio-gram-label">Farina</label>
+                                <input type="number" id="ratio-farina-g" class="ratio-gram-input ratio-derived" value="100" min="0" step="1">
+                                <span class="ratio-gram-unit">grammi</span>
+                            </div>
+                            <div class="ratio-gram-card">
+                                <label class="ratio-gram-label">Acqua</label>
+                                <input type="number" id="ratio-acqua-g" class="ratio-gram-input ratio-derived" value="100" min="0" step="1">
+                                <span class="ratio-gram-unit">grammi</span>
+                            </div>
+                        </div>
+
+                        <div class="ratio-total-row">
+                            <span class="ratio-total-label">Totale impasto</span>
+                            <span class="ratio-total-value" id="ratio-total">250g</span>
+                        </div>
                     </div>
 
                     <!-- Tab: Prepara Levain -->
-                    <div id="tab-levain" class="tab-content active">
+                    <div id="tab-levain" class="tab-content">
                         <p class="tab-description" data-i18n="levain.description">
                             Calcola le quantità per ottenere lo starter desiderato per la panificazione.
                         </p>
@@ -207,54 +255,6 @@
                                     <span data-i18n="storage.shortTerm.tip">L'idratazione ridotta (80%) rende lo starter piu' denso e rallenta ulteriormente la fermentazione in frigo.</span>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Tab: Calcolatore -->
-                    <div id="tab-calcolatore" class="tab-content">
-                        <p class="tab-description">
-                            Inserisci il ratio e i grammi di uno degli ingredienti — gli altri si calcolano in automatico.
-                        </p>
-
-                        <div class="ratio-calc-card">
-                            <div class="ratio-row-label">Ratio starter : farina : acqua</div>
-                            <div class="ratio-row">
-                                <input type="number" id="ratio-s" class="ratio-part-input" value="1" min="0.5" max="20" step="0.5">
-                                <span class="ratio-sep">:</span>
-                                <input type="number" id="ratio-f" class="ratio-part-input" value="2" min="0.5" max="20" step="0.5">
-                                <span class="ratio-sep">:</span>
-                                <input type="number" id="ratio-a" class="ratio-part-input" value="2" min="0.5" max="20" step="0.5">
-                            </div>
-                            <div class="ratio-legend-row">
-                                <span>starter</span>
-                                <span>farina</span>
-                                <span>acqua</span>
-                            </div>
-                        </div>
-
-                        <div class="ratio-grams-label">Inserisci i grammi di uno degli ingredienti</div>
-
-                        <div class="ratio-grams-grid">
-                            <div class="ratio-gram-card">
-                                <label class="ratio-gram-label">Starter</label>
-                                <input type="number" id="ratio-starter-g" class="ratio-gram-input ratio-source" value="50" min="0" step="1">
-                                <span class="ratio-gram-unit">grammi</span>
-                            </div>
-                            <div class="ratio-gram-card">
-                                <label class="ratio-gram-label">Farina</label>
-                                <input type="number" id="ratio-farina-g" class="ratio-gram-input ratio-derived" value="100" min="0" step="1">
-                                <span class="ratio-gram-unit">grammi</span>
-                            </div>
-                            <div class="ratio-gram-card">
-                                <label class="ratio-gram-label">Acqua</label>
-                                <input type="number" id="ratio-acqua-g" class="ratio-gram-input ratio-derived" value="100" min="0" step="1">
-                                <span class="ratio-gram-unit">grammi</span>
-                            </div>
-                        </div>
-
-                        <div class="ratio-total-row">
-                            <span class="ratio-total-label">Totale impasto</span>
-                            <span class="ratio-total-value" id="ratio-total">250g</span>
                         </div>
                     </div>
 
