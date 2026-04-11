@@ -5,6 +5,7 @@
  * Inizializza i moduli e gestisce gli eventi.
  */
 
+import { initRatioCalculator } from './ratio.js';
 import {
     calculateRefresh,
     validateParams,
@@ -79,6 +80,9 @@ function init() {
 
     // Inizializza scroll to top button
     initScrollToTop();
+
+    // Inizializza Calcolatore ratio
+    initRatioCalculator();
 }
 
 /**

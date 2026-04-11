@@ -1014,3 +1014,156 @@ body {
         border-left: none;
     }
 }
+
+/* ============================================
+   Calcolatore Ratio
+   ============================================ */
+
+.ratio-calc-card {
+    background: var(--color-bg-input);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+}
+
+.ratio-row-label {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.ratio-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+}
+
+.ratio-part-input {
+    width: 72px;
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    text-align: center;
+    background: var(--color-bg-card);
+    color: var(--color-text);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.ratio-part-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgb(180 83 9 / 0.15);
+}
+
+.ratio-sep {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+}
+
+.ratio-legend-row {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.ratio-legend-row span {
+    width: 72px;
+    text-align: center;
+    margin: 0 calc(var(--space-sm) / 2);
+}
+
+.ratio-grams-label {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.ratio-grams-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+@media (max-width: 500px) {
+    .ratio-grams-grid { grid-template-columns: 1fr; }
+}
+
+.ratio-gram-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.ratio-gram-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.ratio-gram-input {
+    width: 100%;
+    padding: var(--space-md) var(--space-sm);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    text-align: center;
+    background: var(--color-bg-card);
+    color: var(--color-text);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.ratio-gram-input:focus { outline: none; }
+
+.ratio-gram-input.ratio-source {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgb(180 83 9 / 0.15);
+}
+
+.ratio-gram-input.ratio-derived {
+    background: var(--color-bg-input);
+    color: var(--color-text-secondary);
+}
+
+.ratio-gram-unit {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.ratio-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-bg-input);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-lg);
+}
+
+.ratio-total-label {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-primary-dark);
+}
+
+.ratio-total-value {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-primary);
+}
+}
