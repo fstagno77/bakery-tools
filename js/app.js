@@ -5,7 +5,7 @@
  * Inizializza i moduli e gestisce gli eventi.
  */
 
-import { initRatioCalculator } from './ratio.js';
+import { initRatioCalculator, rerenderCalcolatore } from './ratio.js';
 import {
     calculateRefresh,
     validateParams,
@@ -148,6 +148,8 @@ function initTemperatureToggle() {
         if (maintenanceInputs) {
             handleMaintenanceCalculate(...maintenanceInputs);
         }
+        updatePageTemperatures();
+        rerenderCalcolatore();
     });
 }
 
@@ -178,8 +180,19 @@ function initWeightToggle() {
             flourAmountInput.value = convertValue(currentValue, nowGrams);
         }
 
+        // Converti anche i valori del calcolatore ratio
+        const calcFarinaInput = document.getElementById('calc-farina');
+        const calcAcquaInput  = document.getElementById('calc-acqua');
+        if (calcFarinaInput?.value) {
+            calcFarinaInput.value = convertValue(parseFloat(calcFarinaInput.value), nowGrams);
+        }
+        if (calcAcquaInput?.value) {
+            calcAcquaInput.value = convertValue(parseFloat(calcAcquaInput.value), nowGrams);
+        }
+
         // Aggiorna etichette nelle form
         updatePageWeightUnits();
+        rerenderCalcolatore();
 
         // Ricalcola i risultati con la nuova unità
         if (levainInputs) {

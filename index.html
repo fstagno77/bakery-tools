@@ -60,51 +60,33 @@
                     <!-- Tab: Calcolatore -->
                     <div id="tab-calcolatore" class="tab-content active">
                         <p class="tab-description">
-                            Inserisci il ratio e i grammi di uno degli ingredienti — gli altri si calcolano in automatico.
+                            Inserisci farina e acqua per vedere lo starter necessario per ogni ratio.
                         </p>
 
-                        <div class="ratio-calc-card">
-                            <div class="ratio-row-label">Ratio starter : farina : acqua</div>
-                            <div class="ratio-row">
-                                <input type="number" id="ratio-s" class="ratio-part-input" value="1" min="0.5" max="20" step="0.5">
-                                <span class="ratio-sep">:</span>
-                                <input type="number" id="ratio-f" class="ratio-part-input" value="2" min="0.5" max="20" step="0.5">
-                                <span class="ratio-sep">:</span>
-                                <input type="number" id="ratio-a" class="ratio-part-input" value="2" min="0.5" max="20" step="0.5">
+                        <div class="calc-inputs-grid">
+                            <div class="calc-input-card">
+                                <label class="calc-input-label" for="calc-farina">Farina (<span class="calc-weight-unit">g</span>)</label>
+                                <input type="number" id="calc-farina" value="30" min="10" max="500" step="5">
                             </div>
-                            <div class="ratio-legend-row">
-                                <span>starter</span>
-                                <span>farina</span>
-                                <span>acqua</span>
+                            <div class="calc-input-card">
+                                <label class="calc-input-label" for="calc-acqua">Acqua (<span class="calc-weight-unit">g</span>)</label>
+                                <input type="number" id="calc-acqua" value="30" min="10" max="500" step="5">
                             </div>
                         </div>
 
-                        <div class="ratio-grams-section">
-                            <div class="ratio-grams-label">Inserisci i grammi di uno degli ingredienti</div>
-
-                            <div class="ratio-grams-grid">
-                                <div class="ratio-gram-card">
-                                    <label class="ratio-gram-label">Starter</label>
-                                    <input type="number" id="ratio-starter-g" class="ratio-gram-input ratio-source" value="50" min="0" step="1">
-                                    <span class="ratio-gram-unit">grammi</span>
-                                </div>
-                                <div class="ratio-gram-card">
-                                    <label class="ratio-gram-label">Farina</label>
-                                    <input type="number" id="ratio-farina-g" class="ratio-gram-input ratio-derived" value="100" min="0" step="1">
-                                    <span class="ratio-gram-unit">grammi</span>
-                                </div>
-                                <div class="ratio-gram-card">
-                                    <label class="ratio-gram-label">Acqua</label>
-                                    <input type="number" id="ratio-acqua-g" class="ratio-gram-input ratio-derived" value="100" min="0" step="1">
-                                    <span class="ratio-gram-unit">grammi</span>
-                                </div>
-                            </div>
+                        <div class="calc-temp-row">
+                            <label class="calc-temp-label" for="calc-temp">Temperatura cucina</label>
+                            <input type="range" id="calc-temp" min="18" max="28" value="22" step="1">
+                            <span id="calc-temp-out" class="calc-temp-value">22°C</span>
                         </div>
 
-                        <div class="ratio-total-row">
-                            <span class="ratio-total-label">Totale impasto</span>
-                            <span class="ratio-total-value" id="ratio-total">250g</span>
-                        </div>
+                        <div id="calc-table"></div>
+
+                        <div id="calc-legend" class="calc-legend"></div>
+
+                        <p class="calc-note">
+                            Farina consigliata: 70% bianca + 30% segale integrale · Acqua tiepida (~29°C) se la cucina è fresca · I tempi al picco sono stime — variano con la forza del tuo starter · Fonte: The Perfect Loaf, Maurizio Leo
+                        </p>
                     </div>
 
                     <!-- Tab: Prepara Levain -->
