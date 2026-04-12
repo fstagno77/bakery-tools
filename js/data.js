@@ -3,103 +3,35 @@
  *
  * Dati di riferimento per i tempi di fermentazione
  * basati su rapporti di rinfresco e temperature.
+ * 20 ratio: 1:1:1 → 1:20:20
  */
 
 export const fermentationData = {
     ratios: [
-        {
-            ratio: "1:1:1",
-            starterPart: 1,
-            flourPart: 1,
-            waterPart: 1,
-            times: {
-                cool: { min: 4, max: 6 },
-                medium: { min: 3, max: 5 },
-                warm: { min: 2, max: 4 }
-            }
-        },
-        {
-            ratio: "1:2:2",
-            starterPart: 1,
-            flourPart: 2,
-            waterPart: 2,
-            times: {
-                cool: { min: 5, max: 7 },
-                medium: { min: 4, max: 6 },
-                warm: { min: 3, max: 5 }
-            }
-        },
-        {
-            ratio: "1:3:3",
-            starterPart: 1,
-            flourPart: 3,
-            waterPart: 3,
-            times: {
-                cool: { min: 6, max: 8 },
-                medium: { min: 5, max: 7 },
-                warm: { min: 4, max: 6 }
-            }
-        },
-        {
-            ratio: "1:5:5",
-            starterPart: 1,
-            flourPart: 5,
-            waterPart: 5,
-            times: {
-                cool: { min: 8, max: 12 },
-                medium: { min: 7, max: 10 },
-                warm: { min: 6, max: 8 }
-            }
-        },
-        {
-            ratio: "1:10:10",
-            starterPart: 1,
-            flourPart: 10,
-            waterPart: 10,
-            times: {
-                cool: { min: 12, max: 16 },
-                medium: { min: 10, max: 14 },
-                warm: { min: 9, max: 12 }
-            }
-        },
-        {
-            ratio: "1:15:15",
-            starterPart: 1,
-            flourPart: 15,
-            waterPart: 15,
-            times: {
-                cool: { min: 16, max: 20 },
-                medium: { min: 14, max: 18 },
-                warm: { min: 12, max: 16 }
-            }
-        },
-        {
-            ratio: "1:20:20",
-            starterPart: 1,
-            flourPart: 20,
-            waterPart: 20,
-            times: {
-                cool: { min: 18, max: 24 },
-                medium: { min: 16, max: 20 },
-                warm: { min: 14, max: 18 }
-            }
-        }
+        { ratio: "1:1:1",   starterPart: 1, flourPart: 1,  waterPart: 1,  times: { cool: { min: 4,  max: 6  }, medium: { min: 3,  max: 5  }, warm: { min: 2,  max: 4  } } },
+        { ratio: "1:2:2",   starterPart: 1, flourPart: 2,  waterPart: 2,  times: { cool: { min: 5,  max: 7  }, medium: { min: 4,  max: 6  }, warm: { min: 3,  max: 5  } } },
+        { ratio: "1:3:3",   starterPart: 1, flourPart: 3,  waterPart: 3,  times: { cool: { min: 6,  max: 8  }, medium: { min: 5,  max: 7  }, warm: { min: 4,  max: 6  } } },
+        { ratio: "1:4:4",   starterPart: 1, flourPart: 4,  waterPart: 4,  times: { cool: { min: 7,  max: 10 }, medium: { min: 6,  max: 8  }, warm: { min: 5,  max: 7  } } },
+        { ratio: "1:5:5",   starterPart: 1, flourPart: 5,  waterPart: 5,  times: { cool: { min: 8,  max: 12 }, medium: { min: 7,  max: 10 }, warm: { min: 6,  max: 8  } } },
+        { ratio: "1:6:6",   starterPart: 1, flourPart: 6,  waterPart: 6,  times: { cool: { min: 9,  max: 13 }, medium: { min: 8,  max: 11 }, warm: { min: 7,  max: 9  } } },
+        { ratio: "1:7:7",   starterPart: 1, flourPart: 7,  waterPart: 7,  times: { cool: { min: 10, max: 14 }, medium: { min: 9,  max: 12 }, warm: { min: 8,  max: 10 } } },
+        { ratio: "1:8:8",   starterPart: 1, flourPart: 8,  waterPart: 8,  times: { cool: { min: 11, max: 14 }, medium: { min: 10, max: 13 }, warm: { min: 9,  max: 11 } } },
+        { ratio: "1:9:9",   starterPart: 1, flourPart: 9,  waterPart: 9,  times: { cool: { min: 11, max: 15 }, medium: { min: 10, max: 13 }, warm: { min: 9,  max: 12 } } },
+        { ratio: "1:10:10", starterPart: 1, flourPart: 10, waterPart: 10, times: { cool: { min: 12, max: 16 }, medium: { min: 10, max: 14 }, warm: { min: 9,  max: 12 } } },
+        { ratio: "1:11:11", starterPart: 1, flourPart: 11, waterPart: 11, times: { cool: { min: 13, max: 17 }, medium: { min: 11, max: 15 }, warm: { min: 10, max: 13 } } },
+        { ratio: "1:12:12", starterPart: 1, flourPart: 12, waterPart: 12, times: { cool: { min: 13, max: 17 }, medium: { min: 12, max: 15 }, warm: { min: 11, max: 13 } } },
+        { ratio: "1:13:13", starterPart: 1, flourPart: 13, waterPart: 13, times: { cool: { min: 14, max: 18 }, medium: { min: 12, max: 16 }, warm: { min: 11, max: 14 } } },
+        { ratio: "1:14:14", starterPart: 1, flourPart: 14, waterPart: 14, times: { cool: { min: 15, max: 19 }, medium: { min: 13, max: 17 }, warm: { min: 12, max: 15 } } },
+        { ratio: "1:15:15", starterPart: 1, flourPart: 15, waterPart: 15, times: { cool: { min: 16, max: 20 }, medium: { min: 14, max: 18 }, warm: { min: 12, max: 16 } } },
+        { ratio: "1:16:16", starterPart: 1, flourPart: 16, waterPart: 16, times: { cool: { min: 16, max: 21 }, medium: { min: 14, max: 19 }, warm: { min: 13, max: 16 } } },
+        { ratio: "1:17:17", starterPart: 1, flourPart: 17, waterPart: 17, times: { cool: { min: 17, max: 21 }, medium: { min: 15, max: 19 }, warm: { min: 13, max: 17 } } },
+        { ratio: "1:18:18", starterPart: 1, flourPart: 18, waterPart: 18, times: { cool: { min: 17, max: 22 }, medium: { min: 15, max: 20 }, warm: { min: 14, max: 17 } } },
+        { ratio: "1:19:19", starterPart: 1, flourPart: 19, waterPart: 19, times: { cool: { min: 18, max: 23 }, medium: { min: 16, max: 20 }, warm: { min: 14, max: 18 } } },
+        { ratio: "1:20:20", starterPart: 1, flourPart: 20, waterPart: 20, times: { cool: { min: 18, max: 24 }, medium: { min: 16, max: 20 }, warm: { min: 14, max: 18 } } }
     ],
     temperatureRanges: {
-        cool: {
-            label: "21–22 °C",
-            min: 21,
-            max: 22
-        },
-        medium: {
-            label: "22–24 °C",
-            min: 22,
-            max: 24
-        },
-        warm: {
-            label: "> 24 °C",
-            min: 24,
-            max: 30
-        }
+        cool:   { label: "21–22 °C", min: 21, max: 22 },
+        medium: { label: "22–24 °C", min: 22, max: 24 },
+        warm:   { label: "> 24 °C",  min: 24, max: 30 }
     }
 };
