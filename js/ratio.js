@@ -13,11 +13,11 @@ import { isGrams, getWeightUnitLabel, convertValue, fromCurrentUnit } from './un
 const STORAGE_KEY = 'proof-last-calc';
 
 const zones = [
-    { label: 'Riattivazione aggressiva', color: '#C0392B', bg: 'rgba(192,57,43,0.07)',   flourParts: [1, 2] },
-    { label: 'Riattivazione normale',    color: '#D68910', bg: 'rgba(214,137,16,0.07)',  flourParts: [3, 4] },
-    { label: 'Mantenimento standard',    color: '#1A7A5E', bg: 'rgba(26,122,94,0.07)',   flourParts: [5, 6] },
-    { label: 'Mantenimento lento',       color: '#2471A3', bg: 'rgba(36,113,163,0.07)',  flourParts: [7, 8, 9, 10] },
-    { label: 'Pausa / frigo',            color: '#717D7E', bg: 'rgba(113,125,126,0.06)', flourParts: [11,12,13,14,15,16,17,18,19,20] },
+    { label: 'Riattivazione aggressiva', color: '#C0392B', bg: 'rgba(192,57,43,0.13)',   flourParts: [1, 2] },
+    { label: 'Riattivazione normale',    color: '#D68910', bg: 'rgba(214,137,16,0.13)',  flourParts: [3, 4] },
+    { label: 'Mantenimento standard',    color: '#1A7A5E', bg: 'rgba(26,122,94,0.13)',   flourParts: [5, 6] },
+    { label: 'Mantenimento lento',       color: '#2471A3', bg: 'rgba(36,113,163,0.13)',  flourParts: [7, 8, 9, 10] },
+    { label: 'Pausa / frigo',            color: '#717D7E', bg: 'rgba(113,125,126,0.10)', flourParts: [11,12,13,14,15,16,17,18,19,20] },
 ];
 
 function getZone(flourPart) {
