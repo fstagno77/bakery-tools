@@ -209,6 +209,9 @@ function initTabs() {
             // Attiva la tab selezionata
             btn.classList.add('active');
             document.getElementById(`tab-${tabId}`).classList.add('active');
+
+            // Scrolla il bottone attivo in view nel tab nav (mobile)
+            btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
         });
     });
 }

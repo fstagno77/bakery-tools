@@ -19,6 +19,7 @@ export const translations = {
         // Tabs
         "tabs.levain": "Prepara Levain",
         "tabs.maintenance": "Rinfresco Giornaliero",
+        "tabs.maintenance.short": "Rinfresco",
         "tabs.storage": "Pausa",
 
         // Levain tab
@@ -117,6 +118,7 @@ export const translations = {
         // Tabs
         "tabs.levain": "Build Levain",
         "tabs.maintenance": "Daily Feeding",
+        "tabs.maintenance.short": "Feeding",
         "tabs.storage": "Storage",
 
         // Levain tab
