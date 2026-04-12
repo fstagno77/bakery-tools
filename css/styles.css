@@ -1053,16 +1053,19 @@ body {
 
 .ratio-calc-card {
     background: var(--color-bg-input);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: var(--space-lg);
+    padding: var(--space-xl) var(--space-lg);
     margin-bottom: var(--space-xl);
     text-align: center;
 }
 
 .ratio-row-label {
     font-size: var(--font-size-sm);
-    font-weight: 500;
+    font-weight: 600;
     color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     margin-bottom: var(--space-md);
 }
 
@@ -1070,49 +1073,61 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-xs);
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
 }
 
 .ratio-part-input {
-    width: 72px;
+    width: 80px;
     padding: var(--space-sm);
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-border);
     border-radius: var(--radius-md);
-    font-size: var(--font-size-lg);
-    font-weight: 600;
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
     text-align: center;
     background: var(--color-bg-card);
     color: var(--color-text);
+    font-family: inherit;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    -moz-appearance: textfield;
+}
+
+.ratio-part-input::-webkit-outer-spin-button,
+.ratio-part-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 
 .ratio-part-input:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgb(180 83 9 / 0.15);
+    box-shadow: 0 0 0 3px rgb(180 83 9 / 0.12);
 }
 
 .ratio-sep {
-    font-size: 1.5rem;
+    font-size: var(--font-size-2xl);
     font-weight: 700;
     color: var(--color-text-muted);
+    line-height: 1;
 }
 
 .ratio-legend-row {
     display: flex;
     justify-content: center;
-    gap: var(--space-sm);
+    gap: var(--space-md);
     font-size: 0.7rem;
     color: var(--color-text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.07em;
 }
 
 .ratio-legend-row span {
-    width: 72px;
+    width: 80px;
     text-align: center;
-    margin: 0 calc(var(--space-sm) / 2);
+}
+
+/* --- Grams Section --- */
+.ratio-grams-section {
+    margin-bottom: var(--space-lg);
 }
 
 .ratio-grams-label {
@@ -1120,82 +1135,111 @@ body {
     font-weight: 500;
     color: var(--color-text-secondary);
     margin-bottom: var(--space-md);
+    text-align: center;
 }
 
 .ratio-grams-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-md);
-    margin-bottom: var(--space-lg);
 }
 
 @media (max-width: 500px) {
-    .ratio-grams-grid { grid-template-columns: 1fr; }
+    .ratio-grams-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
+/* Card per ogni ingrediente */
 .ratio-gram-card {
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg) var(--space-md);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     gap: var(--space-xs);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.ratio-gram-card:has(.ratio-source) {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgb(180 83 9 / 0.10);
+    background: var(--color-bg-card);
+}
+
+.ratio-gram-card:has(.ratio-derived) {
+    background: var(--color-bg-input);
+    border-color: var(--color-border);
 }
 
 .ratio-gram-label {
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 0.7rem;
+    font-weight: 700;
     color: var(--color-text-secondary);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    text-align: center;
+    display: block;
+}
+
+.ratio-gram-card:has(.ratio-source) .ratio-gram-label {
+    color: var(--color-primary);
 }
 
 .ratio-gram-input {
     width: 100%;
-    padding: var(--space-md) var(--space-sm);
-    border: 2px solid var(--color-border);
-    border-radius: var(--radius-md);
-    font-size: var(--font-size-xl);
-    font-weight: 600;
+    padding: var(--space-sm) var(--space-xs);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
     text-align: center;
-    background: var(--color-bg-card);
+    background: transparent;
     color: var(--color-text);
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    font-family: inherit;
+    outline: none;
+    -moz-appearance: textfield;
 }
 
-.ratio-gram-input:focus { outline: none; }
-
-.ratio-gram-input.ratio-source {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgb(180 83 9 / 0.15);
+.ratio-gram-input::-webkit-outer-spin-button,
+.ratio-gram-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 
 .ratio-gram-input.ratio-derived {
-    background: var(--color-bg-input);
     color: var(--color-text-secondary);
 }
 
 .ratio-gram-unit {
     font-size: 0.75rem;
+    font-weight: 500;
     color: var(--color-text-muted);
+    text-align: center;
 }
 
+/* --- Total Row --- */
 .ratio-total-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: var(--color-bg-input);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--space-md) var(--space-lg);
 }
 
 .ratio-total-label {
     font-size: var(--font-size-sm);
-    font-weight: 500;
-    color: var(--color-primary-dark);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .ratio-total-value {
     font-size: var(--font-size-2xl);
     font-weight: 700;
     color: var(--color-primary);
-}
 }
