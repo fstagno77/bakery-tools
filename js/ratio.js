@@ -13,11 +13,11 @@ import { isGrams, getWeightUnitLabel, convertValue, fromCurrentUnit } from './un
 const STORAGE_KEY = 'proof-last-calc';
 
 const zones = [
-    { label: 'Riattivazione aggressiva', color: '#E24B4A', flourParts: [1, 2] },
-    { label: 'Riattivazione normale',    color: '#EF9F27', flourParts: [3, 4] },
-    { label: 'Mantenimento standard',    color: '#1D9E75', flourParts: [5, 6] },
-    { label: 'Mantenimento lento',       color: '#378ADD', flourParts: [7, 8, 9, 10] },
-    { label: 'Pausa / frigo',            color: '#888780', flourParts: [11,12,13,14,15,16,17,18,19,20] },
+    { label: 'Riattivazione aggressiva', color: '#C0392B', bg: 'rgba(192,57,43,0.07)',   flourParts: [1, 2] },
+    { label: 'Riattivazione normale',    color: '#D68910', bg: 'rgba(214,137,16,0.07)',  flourParts: [3, 4] },
+    { label: 'Mantenimento standard',    color: '#1A7A5E', bg: 'rgba(26,122,94,0.07)',   flourParts: [5, 6] },
+    { label: 'Mantenimento lento',       color: '#2471A3', bg: 'rgba(36,113,163,0.07)',  flourParts: [7, 8, 9, 10] },
+    { label: 'Pausa / frigo',            color: '#717D7E', bg: 'rgba(113,125,126,0.06)', flourParts: [11,12,13,14,15,16,17,18,19,20] },
 ];
 
 function getZone(flourPart) {
@@ -96,7 +96,7 @@ function render() {
         const times   = r.times[band];
         const timeStr = `${times.min}–${times.max}h`;
 
-        html += `<div class="calc-table-row">
+        html += `<div class="calc-table-row" style="background: ${zone.bg};" data-zone="${zone.label}">
             <span class="calc-ratio" style="color: ${zone.color};">${r.ratio}</span>
             <span class="calc-val-primary">${fmtWeight(starter)}${unit}</span>
             <span class="calc-val-muted">${fmtWeight(farinaGrams)}${unit}</span>
@@ -110,12 +110,45 @@ function render() {
     tableEl.innerHTML = html;
 }
 
+let activeZones = new Set();
+
+function filterRows() {
+    const tableEl = document.getElementById('calc-table');
+    if (!tableEl) return;
+    tableEl.querySelectorAll('.calc-table-row').forEach(row => {
+        const zone = row.dataset.zone;
+        row.style.display = (activeZones.size === 0 || activeZones.has(zone)) ? '' : 'none';
+    });
+}
+
 function buildLegend() {
     const legendEl = document.getElementById('calc-legend');
     if (!legendEl) return;
-    legendEl.innerHTML = zones.map(z =>
-        `<span class="calc-legend-item" style="color: ${z.color}; border-color: ${z.color};">${z.label}</span>`
-    ).join('');
+    legendEl.innerHTML = '';
+    zones.forEach(z => {
+        const chip = document.createElement('span');
+        chip.className = 'calc-legend-item';
+        chip.textContent = z.label;
+        chip.style.color = z.color;
+        chip.style.borderColor = z.color;
+        chip.dataset.zone = z.label;
+
+        chip.addEventListener('click', () => {
+            const isActive = chip.classList.toggle('active');
+            if (isActive) {
+                chip.style.backgroundColor = z.bg;
+                chip.style.fontWeight = '700';
+                activeZones.add(z.label);
+            } else {
+                chip.style.backgroundColor = 'transparent';
+                chip.style.fontWeight = '';
+                activeZones.delete(z.label);
+            }
+            filterRows();
+        });
+
+        legendEl.appendChild(chip);
+    });
 }
 
 export function rerenderCalcolatore() {
