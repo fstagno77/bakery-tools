@@ -1342,10 +1342,6 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .hyd-flour-selector {
-        grid-template-columns: 1fr;
-    }
-
     .hyd-target-input {
         font-size: 3rem;
     }
@@ -1373,6 +1369,12 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
+}
+
+@media (max-width: 480px) {
+    .hyd-flour-selector {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Pill (custom dropdown trigger) */
