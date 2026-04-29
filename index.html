@@ -51,6 +51,7 @@
                     <div class="tab-nav-wrap">
                         <div class="tab-nav">
                             <button class="tab-btn active" data-tab="calcolatore"><span class="tab-icon">⚖️</span> <span>Calcolatore</span></button>
+                            <button class="tab-btn" data-tab="idratazione"><span class="tab-icon">💧</span> <span><span class="tab-full-label" data-i18n="tabs.hydration">Idratazione</span><span class="tab-short-label" data-i18n="tabs.hydration.short">Idr.</span></span></button>
                             <button class="tab-btn" data-tab="levain"><span class="tab-icon">🍞</span> <span data-i18n="tabs.levain">Prepara Levain</span></button>
                             <button class="tab-btn" data-tab="maintenance"><span class="tab-icon">📅</span> <span><span data-i18n="tabs.maintenance" class="tab-full-label">Rinfresco Giornaliero</span><span data-i18n="tabs.maintenance.short" class="tab-short-label">Rinfresco</span></span></button>
                             <button class="tab-btn" data-tab="storage"><span class="tab-icon">❄️</span> <span data-i18n="tabs.storage">Pausa</span></button>
@@ -244,6 +245,52 @@
                         </div>
                     </div>
 
+
+                    <!-- Tab: Idratazione -->
+                    <div id="tab-idratazione" class="tab-content">
+                        <p class="tab-description" data-i18n="hydration.description">
+                            Inserisci gli ingredienti per calcolare l'idratazione effettiva. Modifica il risultato per ricalcolare l'acqua.
+                        </p>
+
+                        <div class="hyd-inputs-grid">
+                            <div class="calc-input-card">
+                                <label class="calc-input-label" for="hyd-farina"><span data-i18n="hydration.flour">Farina</span> (<span class="weight-unit">g</span>)</label>
+                                <input type="number" id="hyd-farina" value="500" min="0" max="5000" step="5">
+                            </div>
+                            <div class="calc-input-card">
+                                <label class="calc-input-label" for="hyd-acqua"><span data-i18n="hydration.water">Acqua</span> (<span class="weight-unit">g</span>)</label>
+                                <input type="number" id="hyd-acqua" value="350" min="0" max="5000" step="5">
+                            </div>
+                            <div class="calc-input-card">
+                                <label class="calc-input-label" for="hyd-lm"><span data-i18n="hydration.lm">LM</span> (<span class="weight-unit">g</span>)</label>
+                                <input type="number" id="hyd-lm" value="100" min="0" max="2000" step="5">
+                            </div>
+                            <div class="calc-input-card">
+                                <label class="calc-input-label" for="hyd-lm-idr"><span data-i18n="hydration.lmHydration">Idr. LM</span> (%)</label>
+                                <input type="number" id="hyd-lm-idr" value="100" min="50" max="150" step="5">
+                            </div>
+                        </div>
+
+                        <div class="hyd-flour-wrap">
+                            <label class="hyd-flour-label" data-i18n="hydration.flourLabel">Tipo di farina</label>
+                            <div id="hyd-flour-section"></div>
+                        </div>
+
+                        <div class="hyd-result-display">
+                            <div class="hyd-result-label" data-i18n="hydration.result">Idratazione</div>
+                            <div class="hyd-result-row">
+                                <input type="number" id="hyd-target" class="hyd-target-input" value="70.0" min="30" max="120" step="0.5">
+                                <span class="hyd-pct">%</span>
+                            </div>
+                            <div class="hyd-result-hint" data-i18n="hydration.resultHint">Modifica per ricalcolare l'acqua</div>
+                        </div>
+
+                        <div id="hyd-breakdown" class="hyd-breakdown"></div>
+
+                        <div id="hyd-insights"></div>
+
+                        <p class="calc-note" data-i18n="hydration.note">Farina e LM restano fissi quando modifichi l'idratazione — si aggiusta solo l'acqua di ricetta.</p>
+                    </div>
 
                 </section>
             </div>

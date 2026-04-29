@@ -101,7 +101,32 @@ export const translations = {
         "validation.minHydration": "L'idratazione deve essere almeno 50%",
         "validation.maxHydration": "L'idratazione massima è 150%",
         "validation.minHours": "Il tempo minimo è 2 ore",
-        "validation.maxHours": "Il tempo massimo è 24 ore"
+        "validation.maxHours": "Il tempo massimo è 24 ore",
+
+        // Hydration calculator
+        "tabs.hydration": "Idratazione",
+        "tabs.hydration.short": "Idr.",
+        "hydration.description": "Inserisci gli ingredienti per calcolare l'idratazione effettiva. Modifica il risultato per ricalcolare l'acqua.",
+        "hydration.flour": "Farina",
+        "hydration.water": "Acqua",
+        "hydration.lm": "LM",
+        "hydration.lmHydration": "Idr. LM",
+        "hydration.result": "Idratazione",
+        "hydration.resultHint": "Modifica per ricalcolare l'acqua",
+        "hydration.totalFlour": "Farina totale",
+        "hydration.totalWater": "Acqua totale",
+        "hydration.note": "Farina e LM restano fissi quando modifichi l'idratazione — si aggiusta solo l'acqua di ricetta.",
+        "hydration.flourLabel": "Tipo di farina",
+        "hydration.addFlour": "+ Blend",
+        "hydration.addFlourRow": "+ Aggiungi farina",
+        "hydration.singleFlour": "← Farina singola",
+        "hydration.blendWarning": "Le percentuali sommano {total}% — devono fare 100%",
+        "hydration.insightImpasto": "Impasto",
+        "hydration.insightRisultato": "Pane finito",
+        "hydration.insightTempi": "Tempi",
+        "hydration.insightAttenzione": "Da tenere d'occhio",
+        "hydration.flourNoteTitle": "Note sulla farina",
+        "hydration.breadsLabel": "Pani tipici"
     },
 
     en: {
@@ -200,7 +225,32 @@ export const translations = {
         "validation.minHydration": "Hydration must be at least 50%",
         "validation.maxHydration": "Maximum hydration is 150%",
         "validation.minHours": "Minimum time is 2 hours",
-        "validation.maxHours": "Maximum time is 24 hours"
+        "validation.maxHours": "Maximum time is 24 hours",
+
+        // Hydration calculator
+        "tabs.hydration": "Hydration",
+        "tabs.hydration.short": "Hyd.",
+        "hydration.description": "Enter your ingredients to calculate effective hydration. Edit the result to recalculate water.",
+        "hydration.flour": "Flour",
+        "hydration.water": "Water",
+        "hydration.lm": "Starter",
+        "hydration.lmHydration": "Starter hyd.",
+        "hydration.result": "Hydration",
+        "hydration.resultHint": "Edit to recalculate water",
+        "hydration.totalFlour": "Total flour",
+        "hydration.totalWater": "Total water",
+        "hydration.note": "Flour and starter stay fixed when you change hydration — only recipe water adjusts.",
+        "hydration.flourLabel": "Flour type",
+        "hydration.addFlour": "+ Blend",
+        "hydration.addFlourRow": "+ Add flour",
+        "hydration.singleFlour": "← Single flour",
+        "hydration.blendWarning": "Percentages add up to {total}% — must total 100%",
+        "hydration.insightImpasto": "Dough",
+        "hydration.insightRisultato": "Finished bread",
+        "hydration.insightTempi": "Timing",
+        "hydration.insightAttenzione": "Watch out for",
+        "hydration.flourNoteTitle": "Flour notes",
+        "hydration.breadsLabel": "Typical breads"
     }
 };
 

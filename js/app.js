@@ -6,6 +6,7 @@
  */
 
 import { initRatioCalculator, rerenderCalcolatore } from './ratio.js';
+import { initHydrationCalculator, rerenderHydration } from './hydration.js';
 import {
     calculateRefresh,
     validateParams,
@@ -83,6 +84,9 @@ function init() {
 
     // Inizializza Calcolatore ratio
     initRatioCalculator();
+
+    // Inizializza Calcolatore Idratazione
+    initHydrationCalculator();
 }
 
 /**
@@ -190,6 +194,12 @@ function initWeightToggle() {
             calcAcquaInput.value = convertValue(parseFloat(calcAcquaInput.value), nowGrams);
         }
 
+        // Converti i valori del calcolatore idratazione (solo campi peso, non percentuali)
+        ['hyd-farina', 'hyd-acqua', 'hyd-lm'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el?.value) el.value = convertValue(parseFloat(el.value), nowGrams);
+        });
+
         // Aggiorna etichette nelle form
         updatePageWeightUnits();
         rerenderCalcolatore();
@@ -201,6 +211,7 @@ function initWeightToggle() {
         if (maintenanceInputs) {
             handleMaintenanceCalculate(...maintenanceInputs);
         }
+        rerenderHydration();
     });
 }
 
