@@ -1,6 +1,30 @@
 {
-    "currentVersion": "0.4",
+    "currentVersion": "0.5",
     "versions": [
+        {
+            "version": "0.5",
+            "date": "2026-04-29",
+            "changes": {
+                "it": [
+                    "Fix layout mobile tab Idratazione: campi input a colonna singola su schermi piccoli",
+                    "Fix selettore farina a colonna singola su mobile",
+                    "PWA iOS: aggiunta icona home screen, modalità standalone e titolo app",
+                    "Rimosso simbolo + duplicato nel pulsante Aggiungi farina",
+                    "Acqua consigliata: hint nel campo acqua con il valore aggiustato per l'assorbimento della farina selezionata",
+                    "Percentuali blend editabili: ogni farina mostra un campo % modificabile",
+                    "Auto-bilanciamento percentuali: al cambio di una %, le altre si aggiustano automaticamente per mantenere il totale a 100%"
+                ],
+                "en": [
+                    "Mobile layout fix for Hydration tab: input fields collapse to single column on small screens",
+                    "Flour selector collapses to single column on mobile",
+                    "iOS PWA: added home screen icon, standalone mode and app title",
+                    "Removed duplicate + symbol from Add flour button",
+                    "Suggested water: hint in the water field showing adjusted amount for selected flour absorption",
+                    "Editable blend percentages: each flour shows an editable % field",
+                    "Auto-balance percentages: when one % changes, the others adjust automatically to keep total at 100%"
+                ]
+            }
+        },
         {
             "version": "0.4",
             "date": "2026-01-10",
