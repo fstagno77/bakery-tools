@@ -4,10 +4,10 @@
  * Gestisce il rendering dei risultati e l'interfaccia utente.
  */
 
-import { fermentationData } from './data.js';
-import { t, getCurrentLang } from './i18n.js';
-import { getTemperatureRanges, isCelsius } from './temperature.js';
-import { formatWeight, getWeightUnitLabel, isGrams, gramsToOz } from './units.js';
+import { fermentationData } from './data.js?v=0.5';
+import { t, getCurrentLang } from './i18n.js?v=0.5';
+import { getTemperatureRanges, isCelsius } from './temperature.js?v=0.5';
+import { formatWeight, getWeightUnitLabel, isGrams, gramsToOz } from './units.js?v=0.5';
 
 /**
  * Renderizza i risultati del calcolo

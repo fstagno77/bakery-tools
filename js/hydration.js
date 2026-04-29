@@ -1,6 +1,6 @@
-import { formatWeight, fromCurrentUnit, toCurrentUnit } from './units.js';
-import { t, getCurrentLang } from './i18n.js';
-import { FLOUR_TYPES, HYDRATION_INSIGHTS, getFascia, getFlourById, getBlendAbsorptionDelta } from './flour-data.js';
+import { formatWeight, fromCurrentUnit, toCurrentUnit } from './units.js?v=0.5';
+import { t, getCurrentLang } from './i18n.js?v=0.5';
+import { FLOUR_TYPES, HYDRATION_INSIGHTS, getFascia, getFlourById, getBlendAbsorptionDelta } from './flour-data.js?v=0.5';
 
 let inputs = null;
 let lockHydration = false;

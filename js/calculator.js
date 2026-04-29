@@ -5,7 +5,7 @@
  * basandosi su quantità desiderata, idratazione e finestra temporale.
  */
 
-import { fermentationData } from './data.js';
+import { fermentationData } from './data.js?v=0.5';
 
 /**
  * Arrotonda un valore a un numero "comodo" (multiplo di 5)

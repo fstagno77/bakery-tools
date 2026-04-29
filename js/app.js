@@ -5,34 +5,34 @@
  * Inizializza i moduli e gestisce gli eventi.
  */
 
-import { initRatioCalculator, rerenderCalcolatore } from './ratio.js';
-import { initHydrationCalculator, rerenderHydration } from './hydration.js';
+import { initRatioCalculator, rerenderCalcolatore } from './ratio.js?v=0.5';
+import { initHydrationCalculator, rerenderHydration } from './hydration.js?v=0.5';
 import {
     calculateRefresh,
     validateParams,
     calculateMaintenance,
     validateMaintenanceParams
-} from './calculator.js';
+} from './calculator.js?v=0.5';
 import {
     renderResults,
     renderMaintenanceResults,
     renderValidationErrors,
     injectErrorStyles
-} from './ui.js';
+} from './ui.js?v=0.5';
 import {
     loadSavedLang,
     getCurrentLang,
     toggleLang,
     updatePageTranslations,
     t
-} from './i18n.js';
+} from './i18n.js?v=0.5';
 import {
     loadSavedUnit,
     isCelsius,
     toggleUnit,
     updatePageTemperatures,
     getUnitLabel
-} from './temperature.js';
+} from './temperature.js?v=0.5';
 import {
     loadSavedWeightUnit,
     isGrams,
@@ -41,7 +41,7 @@ import {
     updatePageWeightUnits,
     convertValue,
     fromCurrentUnit
-} from './units.js';
+} from './units.js?v=0.5';
 
 // Riferimenti globali per ricalcolo dopo cambio lingua
 let levainInputs = null;

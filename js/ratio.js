@@ -6,9 +6,9 @@
  * Salva l'ultimo calcolo in localStorage.
  */
 
-import { fermentationData } from './data.js';
-import { isCelsius } from './temperature.js';
-import { isGrams, getWeightUnitLabel, convertValue, fromCurrentUnit } from './units.js';
+import { fermentationData } from './data.js?v=0.5';
+import { isCelsius } from './temperature.js?v=0.5';
+import { isGrams, getWeightUnitLabel, convertValue, fromCurrentUnit } from './units.js?v=0.5';
 
 const STORAGE_KEY = 'proof-last-calc';
 
