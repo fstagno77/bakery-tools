@@ -33,9 +33,7 @@ function getGrams(input) {
     return fromCurrentUnit(parseFloat(input.value) || 0);
 }
 
-// ─── Flour selector (custom dropdown) ──────────────────────────────────────
-
-const CHEVRON = `<svg class="hyd-flour-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+// ─── Percentage utils ────────────────────────────────────────────────────────
 
 function equalPcts(n) {
     const base = Math.floor(100 / n);
@@ -48,6 +46,83 @@ function syncPcts() {
     flourEntries.forEach((e, i) => { e.pct = pcts[i]; });
 }
 
+function getPctTotal() {
+    return flourEntries.reduce((sum, e) => sum + (parseInt(e.pct) || 0), 0);
+}
+
+function autoBalancePcts(editedIndex) {
+    if (flourEntries.length <= 1) return;
+    const n = flourEntries.length;
+    const minPct = 1;
+    const maxPct = 100 - (n - 1) * minPct;
+    const raw = parseInt(flourEntries[editedIndex].pct) || minPct;
+    flourEntries[editedIndex].pct = Math.max(minPct, Math.min(maxPct, raw));
+
+    const remainder = 100 - flourEntries[editedIndex].pct;
+    const othersCount = n - 1;
+    const base = Math.floor(remainder / othersCount);
+    let leftover = remainder - base * othersCount;
+    flourEntries.forEach((e, i) => {
+        if (i === editedIndex) return;
+        e.pct = base + (leftover-- > 0 ? 1 : 0);
+    });
+}
+
+// ─── Suggested water ─────────────────────────────────────────────────────────
+
+function computeSuggestedWater() {
+    const isGeneric = flourEntries.length === 1 && flourEntries[0].typeId === 'generic';
+    if (isGeneric) return null;
+
+    const total = getPctTotal();
+    if (flourEntries.length > 1 && total !== 100) return null;
+
+    const delta = getBlendAbsorptionDelta(flourEntries);
+    if (Math.abs(delta) < 1) return null;
+
+    const farinaG = getGrams(inputs.farina);
+    const lmG = getGrams(inputs.lm);
+    const lmIdr = parseFloat(inputs.lmIdr.value) || 100;
+    const currentHyd = parseFloat(inputs.target.value) || 0;
+    const suggestedHyd = currentHyd + delta;
+
+    const { acquaG } = computeWaterFromTarget(farinaG, lmG, lmIdr, suggestedHyd);
+    return acquaG >= 0 ? acquaG : null;
+}
+
+function renderAcquaHint() {
+    if (!inputs.acquaHint) return;
+    const suggestedG = computeSuggestedWater();
+    if (suggestedG === null) {
+        inputs.acquaHint.innerHTML = '';
+        return;
+    }
+    const actualG = getGrams(inputs.acqua);
+    const diff = Math.round(suggestedG - actualG);
+    const diffStr = diff >= 0 ? `+${formatWeight(diff)}` : formatWeight(diff);
+    const lang = getCurrentLang();
+    const label = lang === 'it'
+        ? `Consigliata <strong>${formatWeight(suggestedG)}</strong> <span class="hyd-hint-diff">${diffStr}</span>`
+        : `Suggested <strong>${formatWeight(suggestedG)}</strong> <span class="hyd-hint-diff">${diffStr}</span>`;
+    inputs.acquaHint.innerHTML = label;
+}
+
+function renderPctWarning() {
+    if (!inputs.pctWarning) return;
+    if (flourEntries.length <= 1) { inputs.pctWarning.hidden = true; return; }
+    const total = getPctTotal();
+    if (total !== 100) {
+        inputs.pctWarning.textContent = `${total}%`;
+        inputs.pctWarning.hidden = false;
+    } else {
+        inputs.pctWarning.hidden = true;
+    }
+}
+
+// ─── Flour selector (custom dropdown) ──────────────────────────────────────
+
+const CHEVRON = `<svg class="hyd-flour-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+
 function closeAllPanels() {
     if (!inputs?.flourSection) return;
     inputs.flourSection.querySelectorAll('.hyd-flour-panel').forEach(p => p.classList.remove('open'));
@@ -56,15 +131,19 @@ function closeAllPanels() {
 
 function renderFlourSelector() {
     const lang = getCurrentLang();
-    syncPcts();
 
     const pills = flourEntries.map((entry, i) => {
         const flour = getFlourById(entry.typeId);
         const name = flour[lang] || flour.it;
-        const pctBadge = flourEntries.length > 1
-            ? `<span class="hyd-flour-pct">${entry.pct}%</span>`
+        const hasMultiple = flourEntries.length > 1;
+        const pctRow = hasMultiple
+            ? `<div class="hyd-flour-pct-row">
+                   <input type="number" class="hyd-flour-pct-input" value="${entry.pct}"
+                          min="1" max="98" step="1" data-pindex="${i}">
+                   <span class="hyd-flour-pct-symbol">%</span>
+               </div>`
             : '';
-        const removeBtn = flourEntries.length > 1
+        const removeBtn = hasMultiple
             ? `<button class="hyd-flour-remove" data-index="${i}" type="button" aria-label="Rimuovi">×</button>`
             : '';
         const options = FLOUR_TYPES.map(f => {
@@ -73,20 +152,19 @@ function renderFlourSelector() {
         }).join('');
 
         return `
-            <div class="hyd-flour-pill" data-index="${i}">
+            <div class="hyd-flour-pill${hasMultiple ? ' has-pct' : ''}" data-index="${i}">
                 ${removeBtn}
                 <button class="hyd-flour-trigger" data-index="${i}" type="button">
                     <span class="hyd-flour-trigger-name">${name}</span>
-                    ${pctBadge}
                     ${CHEVRON}
                 </button>
+                ${pctRow}
                 <ul class="hyd-flour-panel" data-panel="${i}">${options}</ul>
             </div>`;
     }).join('');
 
     const addSlot = flourEntries.length < 4
         ? `<button class="hyd-flour-add-slot" id="hyd-flour-add-btn" type="button">
-               <span class="hyd-flour-add-icon">+</span>
                <span class="hyd-flour-add-text">${t('hydration.addFlourRow')}</span>
            </button>`
         : '';
@@ -125,9 +203,31 @@ function bindFlourEvents() {
     c.querySelectorAll('.hyd-flour-remove').forEach(btn => {
         btn.addEventListener('click', e => {
             flourEntries.splice(parseInt(btn.dataset.index), 1);
+            syncPcts();
             renderFlourSelector();
             updateAll();
             e.stopPropagation();
+        });
+    });
+
+    c.querySelectorAll('.hyd-flour-pct-input').forEach(inp => {
+        inp.addEventListener('click', e => e.stopPropagation());
+
+        inp.addEventListener('input', e => {
+            flourEntries[parseInt(inp.dataset.pindex)].pct = parseInt(inp.value) || 0;
+            renderPctWarning();
+            e.stopPropagation();
+        });
+
+        inp.addEventListener('blur', e => {
+            const idx = parseInt(inp.dataset.pindex);
+            autoBalancePcts(idx);
+            // Aggiorna i valori degli altri input in-place (senza re-render, preservando focus)
+            c.querySelectorAll('.hyd-flour-pct-input').forEach(other => {
+                other.value = flourEntries[parseInt(other.dataset.pindex)].pct;
+            });
+            renderPctWarning();
+            updateAll();
         });
     });
 
@@ -135,6 +235,7 @@ function bindFlourEvents() {
     if (addBtn) {
         addBtn.addEventListener('click', e => {
             flourEntries.push({ typeId: 'generic', pct: 0 });
+            syncPcts();
             renderFlourSelector();
             updateAll();
             e.stopPropagation();
@@ -263,6 +364,8 @@ function updateAll() {
 
     renderBreakdown(farinaG, acquaG, lmG, result);
     renderInsights(result.hydration);
+    renderAcquaHint();
+    renderPctWarning();
 }
 
 function fromHydrationTarget() {
@@ -286,6 +389,8 @@ function fromHydrationTarget() {
 
     renderBreakdown(farinaG, acquaG, lmG, result);
     renderInsights(result.hydration);
+    renderAcquaHint();
+    renderPctWarning();
 }
 
 // ─── Init ────────────────────────────────────────────────────────────────────
@@ -299,7 +404,9 @@ export function initHydrationCalculator() {
         target:          document.getElementById('hyd-target'),
         breakdown:       document.getElementById('hyd-breakdown'),
         flourSection:    document.getElementById('hyd-flour-section'),
-        insightsSection: document.getElementById('hyd-insights')
+        insightsSection: document.getElementById('hyd-insights'),
+        acquaHint:       document.getElementById('hyd-acqua-hint'),
+        pctWarning:      document.getElementById('hyd-pct-warning'),
     };
 
     [inputs.farina, inputs.acqua, inputs.lm, inputs.lmIdr].forEach(el => {
